@@ -10,16 +10,15 @@ A small nodejs library providing utility methods for download and upload files t
 ## Usage
 
 ```
-  var dp = require('downploader')
-      download = dp.download,
-      upload = dp.upload;
+var dp = require('downploader');
+var download = dp.download;
+var upload = dp.upload;
 
-  download("https://website.com/image.jpg", (err, data) => {
-    error = err;
-    if(!error) {
-      fs.writeFileSync('image.jpg', data.read());
+download("https://website.com/image.jpg", (err, data) => {
+    if(!err) {
+        fs.writeFileSync('image.jpg', data.read());
     }
-  });
+});
 ```
 
 ## Tests
