@@ -5,26 +5,63 @@ A small nodejs library providing utility methods for download and upload files t
 
 ## Installation
 
-  npm install downploader --save
+```
+  npm install --save downploader
+```
 
-## Usage
+## Usage examples
+
+#### Download
 
 ```
-var fs = require('fs');
-var dp = require('downploader');
-var download = dp.download;
-var upload = dp.upload;
+  var fs = require('fs');
+  var dp = require('downploader');
+  var download = dp.download;
 
-download("https://website.com/image.jpg", (err, data) => {
-    if(!err) {
-        fs.writeFileSync('image.jpg', data.read());
-    }
-});
+  download("https://website.com/image.jpg", (err, data) => {
+      if(!err) {
+          fs.writeFileSync('image.jpg', data.read());
+      }
+  });
+```
+
+#### Upload
+
+```
+  var fs = require('fs');
+  var Stream = require('stream').Transform;
+  var dp = require('downploader');
+  var upload = dp.upload;
+
+  var file = "image.jpg";
+  var readStream = fs.createReadStream(file);
+  var bytes = new Stream();
+
+  readStream.on('data', function (chunk) {
+      bytes.push(chunk);
+  });
+
+  readStream.on('error', function (err) {
+      console.log(err);
+  });
+
+  readStream.on('end', function () {
+      upload(bytes, "http://localhost/", (err, data) => {
+          if(err) {
+            console.log(err);
+          } else {
+            console.log(data.read())
+          }
+      });
+  });
 ```
 
 ## Tests
 
-  npm test
+```
+  $ while true; do { echo -e 'HTTP/1.1 200 OK\r\n'; } | sudo nc -l 80; done // start a simple http server for test upload
+  $ npm test
+```
 
 ## Contributing
 
