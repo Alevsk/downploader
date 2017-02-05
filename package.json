@@ -18,7 +18,12 @@
     "download"
   ],
   "author": "Lenin Alevski <lenin@alevsk.com> (https://www.alevsk.com)",
-  "license": "ISC",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/alevsk/downploader/blob/master/LICENSE-MIT"
+    }
+  ],
   "bugs": {
     "url": "https://github.com/alevsk/downploader/issues"
   },
