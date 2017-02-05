@@ -10,6 +10,7 @@ A small nodejs library providing utility methods for download and upload files t
 ## Usage
 
 ```
+var fs = require('fs');
 var dp = require('downploader');
 var download = dp.download;
 var upload = dp.upload;
